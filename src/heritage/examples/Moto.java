@@ -1,4 +1,4 @@
-package examples;
+package heritage.examples;
 
 public class Moto extends Vehicule {
     public void avancer() {

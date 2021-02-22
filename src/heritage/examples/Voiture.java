@@ -1,4 +1,4 @@
-package examples;
+package heritage.examples;
 
 enum Couleur {
     ROUGE, BLEU, VERT
