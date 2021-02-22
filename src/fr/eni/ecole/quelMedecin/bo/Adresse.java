@@ -26,6 +26,8 @@ public class Adresse {
     }
 
     public void afficher() {
+        System.out.println("Adresse :");
+
         // ZAC du Moulin Neuf (optionnelle)
         if (this.mentions != null) {
             System.out.println(this.mentions);

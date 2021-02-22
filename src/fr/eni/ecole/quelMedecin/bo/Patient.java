@@ -4,35 +4,24 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-public class Patient {
-    private String nom;
-    private String prenom;
-    private String numeroDeTelephone;
+public class Patient extends Personne {
     private char sexe;
     private long numeroSecuriteSociale;
     private LocalDate dateNaissance;
     private String commentaires;
-    private Adresse adressePatient;
 
     public Patient(String nom, String prenom, String numeroDeTelephone, char sexe, long numeroSecuriteSociale,
             LocalDate dateNaissance, String commentaires, Adresse adressePatient) {
-        this.nom = nom;
-        this.prenom = prenom;
-        this.numeroDeTelephone = numeroDeTelephone;
+        super(nom, prenom, numeroDeTelephone, adressePatient);
         this.sexe = sexe;
         this.numeroSecuriteSociale = numeroSecuriteSociale;
         this.dateNaissance = dateNaissance;
         this.commentaires = commentaires;
-        this.adressePatient = adressePatient;
-    }
-
-    public String getNom() {
-        return nom.toUpperCase();
     }
 
     private String getSexeFrancais() {
         if (this.sexe == 'F') {
-            return "F�minin";
+            return "Féminin";
         } else {
             return "Masculin";
         }
@@ -43,17 +32,13 @@ public class Patient {
     }
 
     public void afficher() {
-        // Premiere ligne : NOM et pr�nom
-        System.out.println(this.getNom() + " " + this.prenom);
-
-        // Ligne 2 : t�l�phone
-        System.out.println("T�l�phone : " + this.numeroDeTelephone);
+        super.afficher();
 
         // Ligne 3 : Sexe
         System.out.println("Sexe : " + this.getSexeFrancais());
 
-        // Ligne 4 : Num�ro s�cu
-        System.out.println("Num�ro S�curit� Social : " + this.numeroSecuriteSociale);
+        // Ligne 4 : Numéro sécu
+        System.out.println("Numéro Sécurité Social : " + this.numeroSecuriteSociale);
 
         // Ligne 5 : Date de naissance
         System.out.println("Date de naissance : " + this.getDateNaissanceFrancais());
@@ -63,6 +48,6 @@ public class Patient {
                 .println("Commentaires : " + ((this.commentaires == null) ? "[aucun commentaire]" : this.commentaires));
 
         // Affichage de l'adresse
-        this.adressePatient.afficher();
+        this.getAdresse().afficher();
     }
 }

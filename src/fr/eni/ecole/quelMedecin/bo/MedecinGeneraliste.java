@@ -1,10 +1,7 @@
 package fr.eni.ecole.quelMedecin.bo;
 
-public class MedecinGeneraliste {
-    private String nom;
-    private String prenom;
-    private String numeroDeTelephone;
-    private Adresse adresseMedecin;
+public class MedecinGeneraliste extends Personne {
+
     private Creneau[] agenda;
     private int position = 0;
 
@@ -12,27 +9,9 @@ public class MedecinGeneraliste {
 
     public MedecinGeneraliste(String nomDuMedecinGeneraliste, String prenomDuMedecinGeneraliste,
             String numeroDeTelephoneDuMedecinGeneraliste, Adresse adresseMedecin) {
-        this.nom = nomDuMedecinGeneraliste;
-        this.prenom = prenomDuMedecinGeneraliste;
-        this.numeroDeTelephone = numeroDeTelephoneDuMedecinGeneraliste;
-        this.adresseMedecin = adresseMedecin;
+        super(nomDuMedecinGeneraliste, prenomDuMedecinGeneraliste, numeroDeTelephoneDuMedecinGeneraliste,
+                adresseMedecin);
         this.agenda = new Creneau[15];
-    }
-
-    public Adresse getAdresseMedecin() {
-        return this.adresseMedecin;
-    }
-
-    public String getNom() {
-        return this.nom.toUpperCase(); // Je retourne le nom en majuscule
-    }
-
-    public String getNumeroDeTelephone() {
-        return this.numeroDeTelephone;
-    }
-
-    public void setNumeroDeTelephone(String nouveauNumero) {
-        this.numeroDeTelephone = nouveauNumero;
     }
 
     public static int getTarif() {
@@ -50,17 +29,13 @@ public class MedecinGeneraliste {
     }
 
     public void afficher() {
-        // Premi�re ligne : NOM prenom
-        System.out.println(this.getNom() + " " + this.prenom);
+        super.afficher();
 
-        // Deuxi�me ligne : T�l�phone
-        System.out.println("T�l�phone : " + this.getNumeroDeTelephone());
+        // Troisième ligne : Tarif
+        System.out.println("Tarif : " + MedecinGeneraliste.getTarif() + " €");
 
-        // Troisi�me ligne : Tarif
-        System.out.println("Tarif : " + MedecinGeneraliste.getTarif() + " �");
-
-        // Affichage de l'adresse du m�decin
-        this.getAdresseMedecin().afficher();
+        // Affichage de l'adresse du médecin
+        this.getAdresse().afficher();
 
         // Affichage de l'agenda
         for (int i = 0; i < this.agenda.length; i++) {
@@ -69,4 +44,9 @@ public class MedecinGeneraliste {
             }
         }
     }
+
+//    protected void afficherSpecial() {
+//     // Troisième ligne : Tarif
+//        System.out.println("Tarif : " + MedecinGeneraliste.getTarif() + " €");
+//    }
 }
