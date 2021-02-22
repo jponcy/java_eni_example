@@ -31,5 +31,5 @@ class Application {
 
 note left: Effectue les process\n(écoute de l'utilisateur, ...)
 
-Application -> "1" Output
+Application .> "1" Output
 @enduml
