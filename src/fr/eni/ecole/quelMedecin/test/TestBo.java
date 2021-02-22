@@ -6,7 +6,7 @@ import java.time.LocalTime;
 import fr.eni.ecole.quelMedecin.bo.Adresse;
 import fr.eni.ecole.quelMedecin.bo.Creneau;
 import fr.eni.ecole.quelMedecin.bo.MedecinGeneraliste;
-//import fr.eni.ecole.quelMedecin.bo.MedecinSpecialiste;
+import fr.eni.ecole.quelMedecin.bo.MedecinSpecialiste;
 import fr.eni.ecole.quelMedecin.bo.Patient;
 import fr.eni.ecole.quelMedecin.bo.RendezVous;
 
@@ -21,7 +21,7 @@ public class TestBo {
 
     public static void main(String[] args) {
         VerifMedecinRendezVous();
-//        VerifSpecialistes();
+        VerifSpecialistes();
     }
 
     private static void VerifMedecinRendezVous() {
@@ -48,22 +48,22 @@ public class TestBo {
         rdv.afficher();
     }
 
-//    private static void VerifSpecialistes() {
-//        MedecinSpecialiste celine = new MedecinSpecialiste("OCENSEMAIME", "Céline", "0748159263", sh, "ORL", 52);
-//        new Creneau(LocalTime.of(14, 0), 20, celine);
-//        new Creneau(LocalTime.of(14, 20), 20, celine);
-//        new Creneau(LocalTime.of(14, 40), 20, celine);
-//        new Creneau(LocalTime.of(15, 0), 20, celine);
-//        Creneau c = new Creneau(LocalTime.of(15, 20), 20, celine);
-//        new Creneau(LocalTime.of(15, 40), 20, celine);
-//        new Creneau(LocalTime.of(16, 0), 20, celine);
-//        new Creneau(LocalTime.of(16, 20), 20, celine);
-//        new Creneau(LocalTime.of(16, 40), 20, celine);
-//        new Creneau(LocalTime.of(17, 0), 20, celine);
-//        System.out.println("__________________________________________________________________");
-//        System.out.println("__________________________ Spécialistes __________________________");
-//        celine.afficher();
-//        RendezVous rdvSpe = new RendezVous(c, adhemar, LocalDate.of(2020, 6, 17));
-//        rdvSpe.afficher();
-//    }
+    private static void VerifSpecialistes() {
+        MedecinSpecialiste celine = new MedecinSpecialiste("OCENSEMAIME", "Céline", "0748159263", sh, "ORL", 52);
+        new Creneau(LocalTime.of(14, 0), 20, celine);
+        new Creneau(LocalTime.of(14, 20), 20, celine);
+        new Creneau(LocalTime.of(14, 40), 20, celine);
+        new Creneau(LocalTime.of(15, 0), 20, celine);
+        Creneau c = new Creneau(LocalTime.of(15, 20), 20, celine);
+        new Creneau(LocalTime.of(15, 40), 20, celine);
+        new Creneau(LocalTime.of(16, 0), 20, celine);
+        new Creneau(LocalTime.of(16, 20), 20, celine);
+        new Creneau(LocalTime.of(16, 40), 20, celine);
+        new Creneau(LocalTime.of(17, 0), 20, celine);
+        System.out.println("__________________________________________________________________");
+        System.out.println("__________________________ Spécialistes __________________________");
+        celine.afficher();
+        RendezVous rdvSpe = new RendezVous(c, adhemar, LocalDate.of(2020, 6, 17));
+        rdvSpe.afficher();
+    }
 }

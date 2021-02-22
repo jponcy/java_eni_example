@@ -1,0 +1,35 @@
+@startuml OutputManager
+class Output {
+    +write(line: String): void
+}
+
+class ConsoleOutput extends Output {
+    +write(line: String): void
+}
+
+note as console_note
+    Recopie les entrées de
+    l'utilisateur en console
+end note
+ConsoleOutput .. console_note
+
+class FileOutput extends Output {
+    -filepath: String
+    +write(line: String): void
+}
+
+note as file_note
+    Recopie les entrées de
+    l'utilisateur dans
+    un fichier
+end note
+FileOutput .. file_note
+
+class Application {
+    {static} +main(String[] argv): void
+}
+
+note left: Effectue les process\n(écoute de l'utilisateur, ...)
+
+Application -> "1" Output
+@enduml

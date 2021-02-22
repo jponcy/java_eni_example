@@ -6,9 +6,9 @@ import java.time.format.DateTimeFormatter;
 public class Creneau {
     private LocalTime heureDebut;
     private int duree;
-    private MedecinGeneraliste medecinAssocie;
+    private Medecin medecinAssocie;
 
-    public Creneau(LocalTime heureDebut, int duree, MedecinGeneraliste medecinAssocie) {
+    public Creneau(LocalTime heureDebut, int duree, Medecin medecinAssocie) {
         this.heureDebut = heureDebut;
         this.duree = duree;
         this.medecinAssocie = medecinAssocie;
@@ -23,7 +23,7 @@ public class Creneau {
                 heureFin.format(DateTimeFormatter.ofPattern("HH:mm")), this.duree);
     }
 
-    public MedecinGeneraliste getMedecin() {
+    public Medecin getMedecin() {
         return this.medecinAssocie;
     }
 
