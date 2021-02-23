@@ -36,5 +36,28 @@
  *
  * Nous souhaitons ajouter le calcul du prix avec taxe (prix TTC). Modifier les classes, pour que cette nouvelle donnée
  * soit aussi affiché lors de la boucle.
+ *
+ *
+ * === Partie 4 ===
+ *
+ * Nous allons désormais faire des intéractions avec l'utilisateur. Au démarage de l'application, nous demanderons à
+ * l'utilisateur ce qu'il veut faire parmis les choix suivants (les actions seront à réaliser) :
+ * 1) afficher l'inventaire
+ * 2) ajouter un produit alimentaire
+ * 0) quitter le programme
+ *
+ * Une fois une action réalisée, nous reproposerons à l'utilisateur de faire une nouvelle action (jusqu'à ce qu'il
+ * quitte le programme).
+ *
+ *
+ * === Partie 5 ===
+ *
+ * Nous permettons désormais d'ajouter aussi des meuble (3) ajout un meuble).
+ *
+ *
+ * === Bonnus ===
+ *
+ * Ajouter une gestion de fichier pour concerver les données entre deux executions du programme
+ * (le fichier est lu au démarage du programme ; chaque ajout/suppression provoque une sauvegarde du fichier).
  */
 package heritage.inventaire;
