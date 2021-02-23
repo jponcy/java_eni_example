@@ -1,0 +1,153 @@
+@startuml Vehicles
+hide circles
+
+abstract class Vehicle {
+    {abstract} +seDeplacer(): void
+}
+
+abstract class VehiculeMotorise extends Vehicle {
+    -capaciteReservoir: int
+    -niveauReservoir: int
+    +seDeplacer(): void
+}
+
+
+class Velo extends Vehicle {
+    +seDeplacer(): void
+}
+
+
+class Voiture extends VehiculeMotorise
+class Moto extends VehiculeMotorise
+@enduml
+
+
+@startuml
+class Vehicule {
+    +seDeplacer(): void
+}
+
+class Moteur {
+    +consomerCarburant(): void
+}
+
+Vehicule --> "0..1" Moteur
+@enduml
+
+
+
+
+
+@startuml rd2w009feat_v1
+class Client {
+    -nom: String
+    -email: String
+    -password: String
+}
+
+class Commande {
+    -creeLe: LocalDate = now
+    -aLivreA: LocalDateTime
+    -livree: boolean = false
+    -paye: boolean = false
+}
+
+class LigneCommande {
+    -quantite: int
+    -prix: float
+}
+
+class Restaurant {
+    -nom: String
+    -adresse: String
+}
+
+class PlatRestaurant {
+    -nom: String
+    -description: String
+    -prix: float
+    -disponible: boolean = true
+}
+
+Client     "1" --   "*" Commande
+Commande   "*" --   "1" Restaurant
+Restaurant "1" - "1..*" PlatRestaurant
+Commande -> "1..*" LigneCommande
+LigneCommande --> "1" PlatRestaurant
+@enduml
+
+
+
+
+
+
+
+
+
+@startuml rd2w009feat_v2
+class Client {
+    -nom: String
+    -email: String
+    -password: String
+}
+
+class Commande {
+    -creeLe: LocalDate = now
+    -aLivreA: LocalDateTime
+    -livree: boolean = false
+    -paye: boolean = false
+}
+
+class LigneCommande {
+    -quantite: int
+    -prix: float
+}
+
+class Restaurant {
+    -nom: String
+    -adresse: String
+}
+
+abstract class ArticleVendable <<abstract>> {
+    -nom: String
+    -description: String
+    {abstract}+getPrix(): float
+    {abstract}+isDisponible(): boolean
+}
+
+class ArticleUnitaire extends ArticleVendable {
+    -prix: float
+    -disponible: boolean = true
+}
+
+' enum TypeArticle {
+'     BOISSON
+'     PLAT
+'     DESSERT
+' }
+' ArticleVendable --> TypeArticle
+
+class PlatRestaurant extends ArticleUnitaire {
+}
+
+class Dessert extends ArticleUnitaire {
+}
+
+class Boisson extends ArticleUnitaire {
+}
+
+class Menu extends ArticleVendable {
+    +getPrix(): float
+    +isDisponible(): boolean
+}
+
+PlatRestaurant "1" <-- Menu
+Dessert "1" <-- Menu
+Boisson "1" <-- Menu
+
+Client     "1" --   "*" Commande
+Commande   "*" --   "1" Restaurant
+Commande -> "1..*" LigneCommande
+Restaurant "1" - "1..*" ArticleVendable
+LigneCommande --> "1" ArticleVendable
+@enduml

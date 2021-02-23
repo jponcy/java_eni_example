@@ -1,48 +1,36 @@
 package heritage.inventaire;
 
 public class Article {
+    private float prixHT;
 
-//    private String nom;
-//
-//    public Article(String nom) {
-//        this.nom = nom;
-//    }
-//
-//    public void coucou() {
-//        System.out.println("coucou");
-//    }
-//
-//    public void hello(String name) {
-//        System.out.println("Salut " + name);
-//    }
-//
-//    public String getNom() {
-//        return this.nom;
-//    }
-//
-//    @Override
-//    public String toString() {
-//        return this.nom; // + " a " + this.prix + " €";
-//    }
-//
-//    public String describe() {
-//        return this.nom; // + " a " + this.prix + " €";
-//    }
-//
-//    public static void main(String[] args) {
-//        Article a = new Article("Tasse super maman");
-//
-//        System.out.println(a);
-//        System.out.println(a.toString()); // L'appel de toString serait automatique (et est donc inutile ici).
-//
-////        System.out.println(a.describe());
-//
-//        System.out.println(a.getNom());
-//
-//Article[] articles = /* ... */;
-//
-//for (int i = 0; i < articles.length; i++) {
-//    System.out.println((i + 1) + ") " + articles[i]);
-//}
-//    }
+    /** Pourcentage de TVA compris dans la plage [0-100 ]. */
+    private float pourcentTVA;
+
+    /** Nom commercial. */
+    private String nom;
+
+    /** Référence du produit. */
+    private String reference;
+
+//    private float prixTTC;
+
+    public Article(float prixHT, float pourcentTVA, String nom, String reference) {
+        this.prixHT = prixHT;
+        this.pourcentTVA = pourcentTVA;
+        this.nom = nom;
+        this.reference = reference;
+//        this.prixHT = this.computePrixTTC();
+//        this.prixTTC = this.prixHT * (1 + this.pourcentTVA / 100);
+    }
+
+    @Override
+    public String toString() {
+//        float prixTTC = this.prixHT * (1 + this.pourcentTVA / 100);
+        return this.nom + " (" + this.reference + ") a " + this.prixHT + " € (HT), taxe:  " + this.pourcentTVA
+                + "% => " + this.computePrixTTC() + " € (TTC)";
+    }
+
+    private float computePrixTTC() {
+        return this.prixHT * (1 + this.pourcentTVA / 100);
+    }
 }

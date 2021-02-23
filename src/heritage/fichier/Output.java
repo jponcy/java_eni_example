@@ -2,8 +2,6 @@ package heritage.fichier;
 
 import java.io.IOException;
 
-public class Output {
-    public void write(String line) throws IOException {
-        System.out.println("Methode à surcharger (dans une classe enfant)");
-    }
+public abstract class Output {
+    public abstract void write(String line) throws IOException;
 }
