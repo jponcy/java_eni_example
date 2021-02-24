@@ -1,22 +1,32 @@
 @startuml Zoo_v0
+enum EnclosType {
+    TERRE
+    MER
+    LES_DEUX
+}
+
 class Enclos {
-    -bassin: boolean
-    -terrain: boolean
+    -type: String
+    ' -bassin: boolean
+    ' -terrain: boolean
     +ajouterAnimal(animal: Animal): void
     +peutRentrer(animal: Animal): boolean
 }
 
 class Animal {
+    -typeAnimal: String
     -nom: String
     -phraseDeplacement: String
     -phraseRepos: String
-    -avoirBesoinBassin: boolean
-    -avoirBesoinTerrain: boolean
+    ' -avoirBesoinBassin: boolean
+    ' -avoirBesoinTerrain: boolean
     +seDeplacer(): void
     +seReposer(): void
 }
 
 Enclos --> "0..5" Animal: animaux >
+Enclos -> "1" EnclosType: est de type >
+Animal -> "1" EnclosType: compatible avec >
 
 class Application {
     {static} main(argv: String[*]): void
@@ -39,9 +49,18 @@ class $name implements Animal {
 }
 !endprocedure
 
-animal(Sanglier)
+' class AnimalAquatique implements Animal
+' class AnimalTerrestre implements Animal
+' class AnimalAmphibie implements Animal
+
+' interface PeutVivreDansLeau
+' interface PeutVivreSurTerre
+' interface PeutVivreAmphibie extends PeutVivreDansLeau, PeutVivreSurTerre
+
 animal(Dauphin)
 animal(ChatPecheur)
+animal(Phoque)
+animal(Alligator)
 
 
 ' interface Enclos {

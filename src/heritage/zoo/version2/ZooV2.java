@@ -1,4 +1,4 @@
-package heritage.zoo;
+package heritage.zoo.version2;
 
 
 interface Animal {
@@ -43,18 +43,11 @@ class Dauphin implements Animal {
 }
 
 
-interface Enclos {
+abstract class Enclos {
     static final int NB_ANIMAUX_PAR_ENCLOS = 5;
-
-    void ajoutAnimal(Animal animal);
-    boolean peutRentrer(Animal animal);
-}
-
-class Terrain implements Enclos {
     private Animal[] animaux = new Animal[Enclos.NB_ANIMAUX_PAR_ENCLOS];
     private int compteurAnimaux = 0;
 
-    @Override
     public void ajoutAnimal(Animal animal) {
         if (this.ilResteDesPlaces()) {
             this.animaux[this.compteurAnimaux] = animal;
@@ -62,42 +55,49 @@ class Terrain implements Enclos {
         }
     }
 
-    @Override
     public boolean peutRentrer(Animal animal) {
         return this.ilResteDesPlaces() && this.pasDautreEspece(animal) && this.lanimalEstCompatible(animal);
     }
 
-    // Pas generalisable.
-    private boolean lanimalEstCompatible(Animal animal) {
-        return /* animal instanceof Sanglier || */animal instanceof ChatPecheur;
-//        return animal instanceof Dauphin;
-//        return true;
-    }
+    protected abstract boolean lanimalEstCompatible(Animal animal);
 
     private boolean pasDautreEspece(Animal animal) {
         //     l'enclos (terrain) est vide OU le premier animal a la même espèce.
         return this.compteurAnimaux == 0   || this.animaux[0].getClass().equals(animal.getClass());
     }
 
-//    instance of
-//      A // oui
-//      B // oui
-//    ->C // oui
-//      D // non
-//    getClass().equal
-//      A // non
-//      B // non
-//      ->C // oui
-//      D // non
-
     private boolean ilResteDesPlaces() {
         return this.compteurAnimaux < Enclos.NB_ANIMAUX_PAR_ENCLOS;
     }
 }
 
+class Terrain extends Enclos {
+
+    @Override
+    protected boolean lanimalEstCompatible(Animal animal) {
+        return /* animal instanceof Sanglier || */animal instanceof ChatPecheur;
+//        return animal instanceof Terrestre && !(animal instanceof Aquatique);
+    }
+}
+
+class Bassin extends Enclos {
+
+    @Override
+    protected boolean lanimalEstCompatible(Animal animal) {
+        return animal instanceof Dauphin;
+//        return !(animal instanceof Terrestre) && animal instanceof Aquatique;
+    }
+}
+
+class TerrainBassin extends Enclos {
+    @Override
+    protected boolean lanimalEstCompatible(Animal animal) {
+        return true;
+    }
+}
 
 
-public class Zoo {
+public class ZooV2 {
     public static void main(String[] args) {
         Animal[] animaux = new Animal[4];
         animaux[0] = new ChatPecheur();
