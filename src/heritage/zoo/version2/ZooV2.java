@@ -131,3 +131,22 @@ public class ZooV2 {
         }
     }
 }
+
+
+//abstract class MyAnimal {
+//    abstract Class getEnclosType();
+//}
+//
+//class AnimalAquatique extends MyAnimal {
+//
+//    @Override
+//    Class getEnclosType() {
+//        return Bassin.class;
+//    }
+//}
+//
+//for (Enclos e : enclos) {
+//    if (e.getClass().equals(animal.getEnclosType())) {
+//
+//    }
+//}

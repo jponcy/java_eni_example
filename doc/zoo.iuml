@@ -121,12 +121,13 @@ class $name extends Animal implements $impls {
 
 interface Aquatique
 interface Terrestre
-interface Amphibie
-'  extends Aquatique, Terrestre
+interface "SemiAquatique" as Amphibie
 Amphibie --|> Aquatique
 Amphibie --|> Terrestre
 
 animal(ChatPecheur, Terrestre)
+' animal(Alligator, "Terrestre, Aquatique")
+' animal(Phoque, "Terrestre, Aquatique")
 animal(Alligator, Amphibie)
 animal(Phoque, Amphibie)
 animal(Dauphin, Aquatique)
@@ -139,6 +140,63 @@ abstract class Enclos {
     +ajoutAnimal(animal: Animal): void
     +peutRentrer(animal: Animal): boolean
     {abstract}#estCompatible(animal: Animal): boolean
+}
+
+!unquoted procedure enclos($name)
+class $name implements Enclos {
+    #estCompatible(animal: Animal): boolean
+}
+!endprocedure
+
+enclos(Terrain)
+enclos(Bassin)
+enclos(TerrainBassin)
+
+Enclos -> "0..5" Animal: animaux >
+
+' Bassin ..> Aquatique
+' Terrain ..> Terrestre
+' TerrainBassin ..> Amphibie
+@enduml
+
+
+
+@startuml Zoo_vlast
+interface Animal {
+    +seDeplacer(): void
+    +seReposer(): void
+}
+
+!unquoted procedure animal($name, $impls)
+class $name implements $impls {
+    +seDeplacer(): void
+    +seReposer(): void
+}
+!endprocedure
+
+interface "AnimalAquatique" as Aquatique extends Animal
+interface "AnimalTerrestre" as Terrestre extends Animal
+interface "AnimalSemiAquatique" as Amphibie
+Aquatique <|-- Amphibie
+Terrestre <|-- Amphibie
+
+animal(ChatPecheur, Terrestre)
+' animal(Alligator, "Terrestre, Aquatique")
+' animal(Phoque, "Terrestre, Aquatique")
+animal(Alligator, Amphibie)
+animal(Phoque, Amphibie)
+animal(Dauphin, Aquatique)
+
+
+abstract class Enclos {
+    -{static} NB_ANIMAUX_PAR_ENCLOS = 5;
+    -compteurAnimaux: int = 0
+
+    +ajoutAnimal(animal: Animal): void
+    +peutRentrer(animal: Animal): boolean
+    {abstract}#estCompatible(animal: Animal): boolean
+    -pasDautreEspece(animal: Animal): boolean
+    -ilResteDesPlaces(): boolean
 }
 
 !unquoted procedure enclos($name)
