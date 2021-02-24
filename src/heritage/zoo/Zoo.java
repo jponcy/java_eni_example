@@ -16,7 +16,6 @@ class ChatPecheur implements Animal {
     public void seReposer() {
         System.out.println("Je ne dors que d'un oeil");
     }
-
 }
 
 class Sanglier implements Animal {
@@ -32,7 +31,6 @@ class Sanglier implements Animal {
 }
 
 class Dauphin implements Animal {
-
     @Override
     public void seDeplacer() {
         System.out.println("Je nage et je joue");
@@ -58,7 +56,7 @@ class Terrain implements Enclos {
 
     @Override
     public void ajoutAnimal(Animal animal) {
-        if (this.compteurAnimaux < Enclos.NB_ANIMAUX_PAR_ENCLOS) {
+        if (this.ilResteDesPlaces()) {
             this.animaux[this.compteurAnimaux] = animal;
             this.compteurAnimaux++;
         }
@@ -66,16 +64,19 @@ class Terrain implements Enclos {
 
     @Override
     public boolean peutRentrer(Animal animal) {
-        return this.ilResteDesPlaces(animal) && this.pasDautreEspece(animal) && this.lanimalEstCompatible(animal);
+        return this.ilResteDesPlaces() && this.pasDautreEspece(animal) && this.lanimalEstCompatible(animal);
     }
 
     // Pas generalisable.
     private boolean lanimalEstCompatible(Animal animal) {
-        return animal instanceof Sanglier || animal instanceof ChatPecheur;
+        return /* animal instanceof Sanglier || */animal instanceof ChatPecheur;
+//        return animal instanceof Dauphin;
+//        return true;
     }
 
     private boolean pasDautreEspece(Animal animal) {
-        return this.compteurAnimaux == 0 || this.animaux[0].getClass().equals(animal.getClass());
+        //     l'enclos (terrain) est vide OU le premier animal a la même espèce.
+        return this.compteurAnimaux == 0   || this.animaux[0].getClass().equals(animal.getClass());
     }
 
 //    instance of
@@ -89,7 +90,7 @@ class Terrain implements Enclos {
 //      ->C // oui
 //      D // non
 
-    private boolean ilResteDesPlaces(Animal animal) {
+    private boolean ilResteDesPlaces() {
         return this.compteurAnimaux < Enclos.NB_ANIMAUX_PAR_ENCLOS;
     }
 }
@@ -115,10 +116,18 @@ public class Zoo {
             while (pasTrouve && i < enclos.length) {
                 if (enclos[i].peutRentrer(animal)) {
                     enclos[i].ajoutAnimal(animal);
+                    pasTrouve = false;
+                } else {
+                    i++;
                 }
-
-                i++;
             }
+            // --------
+//            for (Enclos e : enclos) {
+//                if (e.peutRentrer(animal)) {
+//                    e.ajoutAnimal(animal);
+//                    break;
+//                }
+//            }
         }
     }
 }
