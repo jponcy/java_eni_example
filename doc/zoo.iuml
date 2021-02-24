@@ -1,0 +1,34 @@
+@startuml Zoo_v1
+interface Animal {
+    +seDeplacer(): void
+    +seReposer(): void
+}
+
+!unquoted procedure animal($name)
+class $name implements Animal {
+    +seDeplacer(): void
+    +seReposer(): void
+}
+!endprocedure
+
+animal(Sanglier)
+animal(Dauphin)
+animal(ChatPecheur)
+
+
+interface Enclos {
+    +{static} NB_ANIMAUX_PAR_ENCLOS = 5;
+
+    +ajoutAnimal(animal: Animal): void
+    +peutRentrer(animal: Animal): boolean
+}
+
+class Terrain implements Enclos {
+    -compteurAnimaux: int = 0
+    +ajoutAnimal(animal: Animal): void
+    +peutRentrer(animal: Animal): boolean
+}
+
+Terrain -> "0..5" Animal: animaux >
+
+@enduml
