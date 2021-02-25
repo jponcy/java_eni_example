@@ -1,0 +1,50 @@
+@startuml Filtre_Chat
+class Messagerie {
+    -messages: String[0..6]
+    -compteurMessages: int = 0
+    ' -conversationFinie: boolean = false
+    +ajouterMessage(message: String): void
+    +finirConversation(): void
+}
+
+!unquoted procedure exception($name)
+class $name <<Exception>>
+
+Messagerie ..> $name: throw >
+!endprocedure
+
+exception(MessageCensureException)
+exception(MessagerieSatureException)
+
+class Application {
+    {static}+main(argv: String[*]): void
+}
+
+Application .> Messagerie
+' Messagerie .> MessageCensureException
+
+legend
+Les classes annotées avec le stereotype <<Exception>> sont considérée comme des exceptions (héritent de la classe Exception).
+Il est autorisé d'ajouter de nouveaux attributs ou méthodes dans chacune des classes (mais pas de nouvelles classes/interface/enumeration).
+
+Étapes proposées de l'exercice :
+# créer les classes Messagerie & Application (vide)
+# la classe Messagerie a tableau de chaines de caractères (private String[] messages) pouvant accueillir jusqu'à 6 phrases.
+# Ecrire la méthode Application::main
+** instancie un objet à partir de la classe Messagerie
+** effectue une boucle permettant à l'utilisateur d'écrire plusieurs phrases
+** suivant ce que l'utilisateur écrit :
+*** exit/quit => nous quitterons la boucle tout en appellant la méthode Messagerie::finirConversation
+*** toute autre phrase => sera envoyée à la méthode Messagerie::ajouterMessage
+# écrire le comportement de la méthode Messagerie::finirConversation (affiche en console tous les messages contenues dans la messagerie)
+# écrire le comportement de la méthode Messagerie::ajouterMessage
+** vérifie qu'il reste assez de place dans le tableau => propage une exception MessagerieSatureException s'il n'y a plus de place
+** vérifie que le message ne contient pas l'une des expressions censurées (par exemple : toto, slt) => propage une exception
+       MessageCensureException si la phrase contient l'un de ces termes
+** ajoute le message dans le tableau (si aucune exception n'a étée propagée)
+# la méthode Application::main capturera les deux exceptions et effectuera un traitement dédié pour chacune
+** MessageCensureException => affichage d'une erreur à l'utilisateur pour lui dire que son message ne correspond pas à la charte d'utilisation
+** MessagerieSatureException => appel la méthode Messagerie::finirConversation et quiterra la boucle (et donc le programme)
+end legend
+
+@enduml

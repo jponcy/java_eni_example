@@ -11,9 +11,39 @@ class Operation {
     {static}+multiplier(a: int, b: int): int
 }
 
+class Calculatrice {
+    {static}+main(argv: String[*]): void
+}
+
 Operation ..> DepassementCapaciteException: throw >
+Calculatrice .> Operation
 @enduml
 
 ' return a + b;
 ' int => 32 bits => 2^32
 ' long => 64 bits => 2^64
+
+
+int ajouter(int a, int b) {
+    long aLong = (long) a;
+    long bLong = (long) b;
+    int retour = a + b;
+
+    if (-294 967 296 != 4 000 000 00) {
+        throw ...
+    }
+
+    if (20 != 20) {
+
+    }
+
+    if (retour != aLong + bLong) {
+        throw new DepassementCapaciteException();
+    }
+
+    return a + b;
+}
+
+
+4 => 0100
+4 => 0000 0100
