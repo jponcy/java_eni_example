@@ -1,0 +1,19 @@
+@startuml TP_exception
+package Java {
+    class Exception
+}
+
+class DepassementCapaciteException extends Exception
+
+class Operation {
+    {static}+ajouter(a: int, b: int): int
+    {static}+soustraire(a: int, b: int): int
+    {static}+multiplier(a: int, b: int): int
+}
+
+Operation ..> DepassementCapaciteException: throw >
+@enduml
+
+' return a + b;
+' int => 32 bits => 2^32
+' long => 64 bits => 2^64
